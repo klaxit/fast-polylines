@@ -1,11 +1,14 @@
 # Fast Polylines
 
+[![Gem Version](https://badge.fury.io/rb/fast-polylines.svg)](https://badge.fury.io/rb/fast-polylines)
+[![CircleCI](https://circleci.com/gh/wayzup/fast-polylines.svg?style=shield&circle-token=:circle-token)](https://circleci.com/gh/wayzup/fast-polylines)
+
 Implementation of the Google polyline algorithm :
 http://code.google.com/apis/maps/documentation/utilities/polylinealgorithm.html
 
-Inspired by Joshua Clayton gem : https://github.com/joshuaclayton/polylines
+Greatly inspired by Joshua Clayton gem : https://github.com/joshuaclayton/polylines
 
-But **at least a 5x faster implementation**.
+But an **at least 5x faster** implementation.
 
 ## Install
 
