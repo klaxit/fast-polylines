@@ -1,7 +1,7 @@
 # Fast Polylines
 
 [![Gem Version](https://badge.fury.io/rb/fast-polylines.svg)](https://badge.fury.io/rb/fast-polylines)
-[![CircleCI](https://circleci.com/gh/wayzup/fast-polylines.svg?style=shield&circle-token=:circle-token)](https://circleci.com/gh/wayzup/fast-polylines)
+[![CircleCI](https://circleci.com/gh/klaxit/fast-polylines.svg?style=shield&circle-token=:circle-token)](https://circleci.com/gh/klaxit/fast-polylines)
 
 Implementation of the Google polyline algorithm :
 http://code.google.com/apis/maps/documentation/utilities/polylinealgorithm.html
