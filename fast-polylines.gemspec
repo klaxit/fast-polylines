@@ -7,8 +7,8 @@ Gem::Specification.new do |s|
   s.version     = FastPolylines::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Cyrille Courtière"]
-  s.email       = ["cyrille@wayzup.com"]
-  s.homepage    = "http://github.com/wayzup/fast-polylines"
+  s.email       = ["cyrille@klaxit.com"]
+  s.homepage    = "http://github.com/klaxit/fast-polylines"
   s.summary     = "Fast & easy Google polylines"
   s.license     = "MIT"
 
