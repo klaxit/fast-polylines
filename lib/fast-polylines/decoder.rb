@@ -20,13 +20,13 @@ module FastPolylines
       end
       lat = lng = 0
       coords.each_slice(2).map do |coords_pair|
-        lat += decode_number(coords_pair[0], precision)
-        lng += decode_number(coords_pair[1], precision)
-        [lat, lng]
+        lat += decode_number(coords_pair[0])
+        lng += decode_number(coords_pair[1])
+        [lat / precision, lng / precision]
       end
     end
 
-    def self.decode_number(string, precision = 1e5)
+    def self.decode_number(string)
       result = 1
       shift = 0
       string.each_byte do |b|
@@ -34,8 +34,7 @@ module FastPolylines
         result += b << shift
         shift += 5
       end
-      result = (result & 1).nonzero? ? (~result >> 1) : (result >> 1)
-      result / precision
+      (result & 1).nonzero? ? (~result >> 1) : (result >> 1)
     end
     private_class_method :decode_number
   end
