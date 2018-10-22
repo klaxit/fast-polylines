@@ -28,5 +28,12 @@ describe FastPolylines::Decoder do
         expect(described_class.decode("krk{FdxdlO?e@")).to eq points
       end
     end
+    context "with points that cause float overflow" do
+      let(:polyline) { "ahdiHsmeMHPDN|A`FVt@" }
+      let(:points) { [[48.85137, 2.32682], [48.85132, 2.32673], [48.85129, 2.32665], [48.85082, 2.32552], [48.8507, 2.32525]] }
+      it "should respect precision" do
+        expect(described_class.decode(polyline)).to eq points
+      end
+    end
   end
 end
