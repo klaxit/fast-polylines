@@ -8,13 +8,6 @@ describe FastPolylines::Decoder do
       it "should decode a polyline correctly" do
         expect(described_class.decode(polyline)).to eq points
       end
-      it "should perform at least 5x faster than the Polylines gem" do
-        expect {
-          described_class.decode(polyline)
-        }.to perform_faster_than {
-          Polylines::Decoder.decode_polyline(polyline)
-        }.at_least(5).times
-      end
     end
     context "with 1e6 precision" do
       let(:polyline) { "_izlhA~rlgdF_{geC~ywl@_kwzCn`{nI" }

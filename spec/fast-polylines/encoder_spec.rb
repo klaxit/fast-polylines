@@ -8,13 +8,6 @@ describe FastPolylines::Encoder do
       it "should encode points correctly" do
         expect(described_class.encode(points)).to eq polyline
       end
-      it "should perform at least 5x faster than the Polylines gem" do
-        expect {
-          described_class.encode(points)
-        }.to perform_faster_than {
-          Polylines::Encoder.encode_points(points)
-        }.at_least(5).times
-      end
     end
     context "with 1e6 precision" do
       let(:polyline) { "_izlhA~rlgdF_{geC~ywl@_kwzCn`{nI" }
