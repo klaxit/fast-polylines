@@ -13,11 +13,11 @@ Gem::Specification.new do |s|
   s.license     = "MIT"
 
   s.files = `git ls-files -- lib/*`.split("\n")
-  s.files += %w(README.md)
+  s.files += ["README.md"]
   s.test_files = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.require_paths = "lib"
 
-  s.add_development_dependency("rspec", "~> 3.5")
+  s.add_development_dependency("benchmark-ips")
   s.add_development_dependency("polylines", "~> 0.3")
-  s.add_development_dependency("rspec-benchmark", "~> 0.3")
+  s.add_development_dependency("rspec", "~> 3.5")
 end

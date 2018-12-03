@@ -3,9 +3,6 @@ require "bundler/setup"
 
 require "fast-polylines"
 
-require "rspec-benchmark"
-require "polylines"
-
 RSpec.configure do |config|
-  include RSpec::Benchmark::Matchers
+  # Additional config goes here
 end
