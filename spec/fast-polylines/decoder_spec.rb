@@ -29,4 +29,15 @@ describe FastPolylines::Decoder do
       end
     end
   end
+  describe ".decode_spaciotemporal" do
+    context "composition" do
+      #[38.5, -120.2, 1545721234], [40.7, -120.95, 1545740000], [43.252, -126.453, 1545841234]
+      let(:points) { (0..100).map { [rand(-90..90), rand(-180..180), rand(0..198765432)] } }
+      it "should be the left inverse of encode_spaciotemporal" do
+        expect(described_class.decode_spaciotemporal(
+          FastPolylines::Encoder.encode_spaciotemporal(points))
+        ).to eq points
+      end
+    end
+  end
 end
