@@ -4,7 +4,7 @@
 [![CircleCI](https://circleci.com/gh/klaxit/fast-polylines.svg?style=shield&circle-token=:circle-token)](https://circleci.com/gh/klaxit/fast-polylines)
 
 Implementation of the Google polyline algorithm :
-http://code.google.com/apis/maps/documentation/utilities/polylinealgorithm.html
+https://code.google.com/apis/maps/documentation/utilities/polylinealgorithm.html
 
 Greatly inspired by Joshua Clayton gem : https://github.com/joshuaclayton/polylines
 
