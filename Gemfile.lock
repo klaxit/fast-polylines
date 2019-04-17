@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    fast-polylines (0.1.1)
+    fast-polylines (1.0.0)
 
 GEM
   remote: http://rubygems.org/
@@ -33,4 +33,4 @@ DEPENDENCIES
   rspec (~> 3.5)
 
 BUNDLED WITH
-   1.17.1
+   2.0.1
