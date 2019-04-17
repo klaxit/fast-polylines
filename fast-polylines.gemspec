@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Cyrille Courtière"]
   s.email       = ["cyrille@klaxit.com"]
-  s.homepage    = "http://github.com/klaxit/fast-polylines"
+  s.homepage    = "https://github.com/klaxit/fast-polylines"
   s.summary     = "Fast & easy Google polylines"
   s.license     = "MIT"
 
