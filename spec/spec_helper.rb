@@ -1,7 +1,7 @@
 require "rubygems"
 require "bundler/setup"
 
-require "fast-polylines"
+require "fast_polylines"
 
 RSpec.configure do |config|
   # Additional config goes here
