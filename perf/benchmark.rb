@@ -1,11 +1,13 @@
-require "fast-polylines"
+# frozen_string_literal: true
+
+require "fast_polylines"
 require "polylines"
 require "benchmark"
 require "benchmark/ips"
 
 POLYLINE = "{leiHkmjM}z@vcE~JlKx@b~A~Jpy@vv@bhArLpVxFta@sCjEbL~c@rEn{@_HzXj" \
            "EdUg@rfCbHbSp\\fKpQzSg@|fCxTfvAzZduEyC|z@al@l~BcOnzBr@jUfuDfgFf" \
-           "xAbzA~HxUfKcE_B}YbEyWti@_rAr`AhNte@x]dLyk@|Vyd@".freeze
+           "xAbzA~HxUfKcE_B}YbEyWti@_rAr`AhNte@x]dLyk@|Vyd@"
 POINTS = [
   [48.85726, 2.35238], [48.86685, 2.3209], [48.86493, 2.31891],
   [48.86464, 2.30369], [48.86272, 2.29432], [48.8538, 2.28262],
@@ -21,20 +23,25 @@ POINTS = [
   [48.76883, 2.06241], [48.765, 2.06846]
 ].freeze
 
-puts "\n** ENCODING **\n\n"
+# Puts a Centered, bold and inverted text for better visibility.
+def shout_out(string)
+  puts "\n\e[7;1m#{string.center(75)}\e[27;0m\n\n"
+end
+
+shout_out "ENCODING"
 
 Benchmark.ips do |x|
-  x.report("Polylines encode") { Polylines::Encoder.encode_points(POINTS) }
-  x.report("FastPolylines encode") { FastPolylines::Encoder.encode(POINTS) }
+  x.report("Polylines") { Polylines::Encoder.encode_points(POINTS) }
+  x.report("FastPolylines") { FastPolylines.encode(POINTS) }
 
   x.compare!
 end
 
-puts "\n** DECODING **\n\n"
+shout_out "DECODING"
 
 Benchmark.ips do |x|
-  x.report("Polylines decode") { Polylines::Decoder.decode_polyline(POLYLINE) }
-  x.report("FastPolylines decode") { FastPolylines::Decoder.decode(POLYLINE) }
+  x.report("Polylines") { Polylines::Decoder.decode_polyline(POLYLINE) }
+  x.report("FastPolylines") { FastPolylines.decode(POLYLINE) }
 
   x.compare!
 end
