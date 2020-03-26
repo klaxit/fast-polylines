@@ -72,15 +72,17 @@ FastPolylines.decode("_p~iF~ps|U_ulLnnqC_mqNvxq`@")
 
 ## Advanced usage
 
-* With a different precision (default precision of `5` decimals):
-  ```ruby
-  FastPolylines.encode([[38.5, -120.2], [40.7, -120.95], [43.252, -126.453]], 6)
-  # "_izlhA~rlgdF_{geC~ywl@_kwzCn`{nI"
+**Use a different precision**
 
-  FastPolylines.decode("_izlhA~rlgdF_{geC~ywl@_kwzCn`{nI", 6)
-  # [[38.5, -120.2], [40.7, -120.95], [43.252, -126.453]]
-  ```
-  The precision max is `14`.
+Default precision is `5` decimals, to use a precision of `6` decimals:
+```ruby
+FastPolylines.encode([[38.5, -120.2], [40.7, -120.95], [43.252, -126.453]], 6)
+# "_izlhA~rlgdF_{geC~ywl@_kwzCn`{nI"
+
+FastPolylines.decode("_izlhA~rlgdF_{geC~ywl@_kwzCn`{nI", 6)
+# [[38.5, -120.2], [40.7, -120.95], [43.252, -126.453]]
+```
+The precision max is `13`.
 
 ## Migrate from 1.0.0
 
@@ -93,7 +95,7 @@ FastPolylines::Encoder.encode([[1.2, 1.2], [2.4, 2.4]], 1e6)
 FastPolylines.encode([[1.2, 1.2], [2.4, 2.4]], 6)
 ```
 
-The new version of `FastPolylines` doesn't support precision more than `1e10`,
+The new version of `FastPolylines` doesn't support precision more than `1e13`,
 you should not consider using it anyway since [it is way too precise][xkcd].
 
 `Encoder` and `Decoder` modules are deprecated in favor of the single parent
