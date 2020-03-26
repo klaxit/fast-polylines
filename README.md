@@ -74,7 +74,7 @@ FastPolylines.decode("_p~iF~ps|U_ulLnnqC_mqNvxq`@")
 
 **Use a different precision**
 
-Default precision is `5` decimals, to use a precision of `6` decimals:
+Default precision is `5` decimals, to use a precision of `6`:
 ```ruby
 FastPolylines.encode([[38.5, -120.2], [40.7, -120.95], [43.252, -126.453]], 6)
 # "_izlhA~rlgdF_{geC~ywl@_kwzCn`{nI"
@@ -84,7 +84,7 @@ FastPolylines.decode("_izlhA~rlgdF_{geC~ywl@_kwzCn`{nI", 6)
 ```
 The precision max is `13`.
 
-## Migrate from 1.0.0
+## Migrate from 1.0.0
 
 **TL;DR:**
 
