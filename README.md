@@ -61,7 +61,7 @@ gem "fast-polylines", "~> 2.0.0"
 ## Usage
 
 ```ruby
-require "fast-polylines"
+require "fast_polylines"
 
 FastPolylines.encode([[38.5, -120.2], [40.7, -120.95], [43.252, -126.453]])
 # "_p~iF~ps|U_ulLnnqC_mqNvxq`@"
@@ -90,10 +90,14 @@ The precision max is `13`.
 
 ```ruby
 # before
+require "fast-polylines"
 FastPolylines::Encoder.encode([[1.2, 1.2], [2.4, 2.4]], 1e6)
 # after
+require "fast_polylines"
 FastPolylines.encode([[1.2, 1.2], [2.4, 2.4]], 6)
 ```
+
+**Detailled:**
 
 The new version of `FastPolylines` doesn't support precision more than `1e13`,
 you should not consider using it anyway since [it is way too precise][xkcd].
@@ -105,6 +109,9 @@ printed.
 The precision is now an integer representing the number of decimals. It is
 slightly smaller, and mostly this will avoid having any float value as
 precision.
+
+The file name to require is now snake_cased, you'll have to require
+`fast_polylines`. The gem name stays the same however.
 
 ## Run the Benchmark
 
