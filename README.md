@@ -5,7 +5,7 @@
 
 Implementation of the [Google polyline algorithm][algorithm].
 
-**BREAKING CHANGES:** The version 2.0.0 of FastPolylines includes breaking changes, see [Migrate from 1.0.0](#migrate-from-1.0.0)
+**BREAKING CHANGES:** The version 2.0.0 of FastPolylines includes breaking changes, see [Migrate from 1.0.0](#migrate-from-100)
 
 
 About **300x faster encoding and decoding**  than [Joshua Clayton's gem][polylines].
