@@ -57,6 +57,10 @@ or in your `Gemfile`:
 ```ruby
 gem "fast-polylines", "~> 2.0.0"
 ```
+or (require in each file is not needed in that case)
+```ruby
+gem "fast-polylines", "~> 2.0.0", require: 'fast_polylines'
+```
 
 ## Usage
 
