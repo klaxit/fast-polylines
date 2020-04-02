@@ -72,15 +72,18 @@ rb_FastPolylines__decode(int argc, VALUE *argv, VALUE self) {
 
 static inline uint8_t
 _polyline_encode_number(char *chunks, int64_t number) {
+	dbg("_polyline_encode_number(\"%s\", %lli)\n", chunks, number);
 	number = number < 0 ? ~(number << 1) : (number << 1);
 	uint8_t i = 0;
-	while (number > 0x20) {
+	while (number >= 0x20) {
 		uint8_t chunk = number & 0x1f;
 		chunks[i++] = (0x20 | chunk) + 63;
 		number = number >> 5;
 	}
-	dbg("%u encoded chunks\n", i);
 	chunks[i++] = number + 63;
+	dbg("%u encoded chunks\n", i);
+	dbg("chunks: %s\n", chunks);
+	dbg("/_polyline_encode_number");
 	return i;
 }
 
@@ -108,6 +111,7 @@ rb_FastPolylines__encode(int argc, VALUE *argv, VALUE self) {
 	for (i = 0; i < len; i++) {
 			current_pair = RARRAY_AREF(argv[0], i);
 			uint8_t j;
+			Check_Type(current_pair, T_ARRAY);
 			if (RARRAY_LEN(current_pair) != 2) {
 				free(chunks);
 				rb_raise(rb_eArgError, "wrong number of coordinates");
@@ -136,6 +140,7 @@ rb_FastPolylines__encode(int argc, VALUE *argv, VALUE self) {
 				// We pass a pointer to the current chunk that need to be filled. Doing so
 				// avoid having to copy the string every single iteration.
 				chunks_index += _polyline_encode_number(chunks + chunks_index * sizeof(char), delta);
+				dbg("%s\n", chunks);
 			}
 	}
 	dbg("final chunks_index: %zu\n", chunks_index);

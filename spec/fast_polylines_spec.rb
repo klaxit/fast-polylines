@@ -1,10 +1,8 @@
-require "spec_helper"
-
 describe FastPolylines do
   describe ".decode" do
     let(:points) { [[38.5, -120.2], [40.7, -120.95], [43.252, -126.453]] }
+    let(:polyline) { "_p~iF~ps|U_ulLnnqC_mqNvxq`@" }
     context "with default precision" do
-      let(:polyline) { "_p~iF~ps|U_ulLnnqC_mqNvxq`@" }
       it "should decode a polyline correctly" do
         expect(described_class.decode(polyline)).to eq points
       end
@@ -47,9 +45,34 @@ describe FastPolylines do
   end
 
   describe ".encode" do
-    let(:points)   { [[38.5, -120.2], [40.7, -120.95], [43.252, -126.453]] }
+    let(:points) { [[38.5, -120.2], [40.7, -120.95], [43.252, -126.453]] }
+    let(:polyline) { "_p~iF~ps|U_ulLnnqC_mqNvxq`@" }
+    it "should raise for invalid input" do
+      expect { described_class.encode(points[0]) }.to raise_error(
+        TypeError,
+        "wrong argument type Float (expected Array)"
+      )
+      expect { described_class.encode([points]) }.to raise_error(
+        ArgumentError,
+        "wrong number of coordinates"
+      )
+      expect { described_class.encode([points[0..1]]) }.to raise_error(
+        TypeError,
+        "no implicit conversion to Float from Array"
+      )
+    end
+    # The method `_polyline_encode_number("", 16)` will check for a chunk
+    # of the size 32, which is the chunk size limit. This was errored due to
+    # a bad sign.
+    # Reported in issue #15, closed in PR #16
+    context "with points close to the chunk size limit" do
+      let(:points) { [[0, 0.00016]] }
+      let(:polyline) { "?_@" }
+      it "should encode points correctly" do
+        expect(described_class.encode(points)).to eq polyline
+      end
+    end
     context "with default precision" do
-      let(:polyline) { "_p~iF~ps|U_ulLnnqC_mqNvxq`@" }
       it "should encode points correctly" do
         expect(described_class.encode(points)).to eq polyline
       end
