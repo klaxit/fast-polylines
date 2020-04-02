@@ -5,7 +5,7 @@
 
 Implementation of the [Google polyline algorithm][algorithm].
 
-**BREAKING CHANGES:** The version 2.0.0 of FastPolylines includes breaking changes, see [Migrate from 1.0.0](#migrate-from-100)
+**BREAKING CHANGES:** The version 2 of FastPolylines includes breaking changes, see [Migrate from V1](#migrate-from-V1)
 
 
 About **300x faster encoding and decoding**  than [Joshua Clayton's gem][polylines].
@@ -16,35 +16,35 @@ About **300x faster encoding and decoding**  than [Joshua Clayton's gem][polylin
 ——————————————————————————————— ENCODING ————————————————————————————————
 
 Warming up --------------------------------------
-           Polylines   277.000  i/100ms
-     FastPolylinesV1     2.050k i/100ms
-     FastPolylinesV2    73.822k i/100ms
+           Polylines   310.000  i/100ms
+     FastPolylinesV1     2.607k i/100ms
+     FastPolylinesV2    59.833k i/100ms
 Calculating -------------------------------------
-           Polylines      3.254k (± 1.8%) i/s -     16.343k in   5.023767s
-     FastPolylinesV1     25.715k (± 3.7%) i/s -    129.150k in   5.029675s
-     FastPolylinesV2    933.751k (± 4.3%) i/s -      4.725M in   5.072446s
+           Polylines      2.957k (± 5.9%) i/s -     14.880k in   5.049867s
+     FastPolylinesV1     25.644k (± 5.8%) i/s -    127.743k in   4.999954s
+     FastPolylinesV2    682.981k (± 7.7%) i/s -      3.410M in   5.025952s
 
 Comparison:
-     FastPolylinesV2:   933750.7 i/s
-     FastPolylinesV1:    25715.1 i/s - 36.31x  slower
-           Polylines:     3254.3 i/s - 286.93x  slower
+     FastPolylinesV2:   682980.7 i/s
+     FastPolylinesV1:    25643.7 i/s - 26.63x  slower
+           Polylines:     2957.1 i/s - 230.97x  slower
 
 
 ———————————————————————————————  DECODING ————————————————————————————————
 
 Warming up --------------------------------------
-           Polylines   140.000  i/100ms
-     FastPolylinesV1     1.602k i/100ms
-     FastPolylinesV2    36.432k i/100ms
+           Polylines   127.000  i/100ms
+     FastPolylinesV1     1.225k i/100ms
+     FastPolylinesV2    40.667k i/100ms
 Calculating -------------------------------------
-           Polylines      1.401k (± 2.2%) i/s -      7.000k in   5.000321s
-     FastPolylinesV1     16.465k (± 3.7%) i/s -     83.304k in   5.067786s
-     FastPolylinesV2    396.100k (± 5.2%) i/s -      2.004M in   5.074500s
+           Polylines      1.289k (± 6.1%) i/s -      6.477k in   5.046552s
+     FastPolylinesV1     15.445k (± 4.4%) i/s -     77.175k in   5.006896s
+     FastPolylinesV2    468.413k (± 7.8%) i/s -      2.359M in   5.068936s
 
 Comparison:
-     FastPolylinesV2:   396100.0 i/s
-     FastPolylinesV1:    16464.6 i/s - 24.06x  slower
-           Polylines:     1400.6 i/s - 282.81x  slower
+     FastPolylinesV2:   468412.8 i/s
+     FastPolylinesV1:    15445.4 i/s - 30.33x  slower
+           Polylines:     1288.8 i/s - 363.46x  slower
 ```
 
 ## Install
@@ -84,7 +84,7 @@ FastPolylines.decode("_izlhA~rlgdF_{geC~ywl@_kwzCn`{nI", 6)
 ```
 The precision max is `13`.
 
-## Migrate from 1.0.0
+## Migrate from V1
 
 **TL;DR:**
 

@@ -1,3 +1,6 @@
+# This gives debug output in the C code and some debugger flags, useful for... Debugging.
+# See ext/fast_polylines/extconf.rb
+DEBUG = # 1
 EXT_NAME = fast_polylines
 RUBY_FLAG = -I lib:ext -r $(EXT_NAME)
 ALL_TARGETS = $(wildcard ext/$(EXT_NAME)/*.c) $(wildcard ext/$(EXT_NAME)/*.h)
@@ -8,7 +11,7 @@ console: ext
 
 .PHONY: test
 test: ext
-	bundle exec rspec $(RUBY_FLAG) spec
+	bundle exec rspec
 
 .PHONY: rubocop
 rubocop:
