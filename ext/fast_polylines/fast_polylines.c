@@ -1,4 +1,4 @@
-#include <ruby/ruby.h>
+#include <ruby.h>
 
 // An encoded number can have at most _precision_ characters. However,
 // it seems like we have a fuzzy behavior on low precisions. Hence a guard
@@ -83,7 +83,7 @@ _polyline_encode_number(char *chunks, int64_t number) {
 	chunks[i++] = number + 63;
 	dbg("%u encoded chunks\n", i);
 	dbg("chunks: %s\n", chunks);
-	dbg("/_polyline_encode_number");
+	dbg("/_polyline_encode_number\n");
 	return i;
 }
 

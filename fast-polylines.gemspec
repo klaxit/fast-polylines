@@ -3,23 +3,24 @@
 $LOAD_PATH.push File.expand_path("lib", __dir__)
 require "fast_polylines/version"
 
-Gem::Specification.new do |s|
-  s.name        = "fast-polylines"
-  s.version     = FastPolylines::VERSION
-  s.platform    = Gem::Platform::RUBY
-  s.authors     = ["Cyrille Courtière", "Ulysse Buonomo"]
-  s.email       = ["dev@klaxit.com"]
-  s.homepage    = "https://github.com/klaxit/fast-polylines"
-  s.summary     = "Fast & easy Google polylines"
-  s.license     = "MIT"
+Gem::Specification.new do |spec|
+  spec.name        = "fast-polylines"
+  spec.version     = FastPolylines::VERSION
+  spec.platform    = Gem::Platform::RUBY
+  spec.authors     = ["Cyrille Courtière", "Ulysse Buonomo"]
+  spec.email       = ["dev@klaxit.com"]
+  spec.homepage    = "https://github.com/klaxit/fast-polylines"
+  spec.summary     = "Fast & easy Google polylines"
+  spec.license     = "MIT"
+  spec.required_ruby_version = Gem::Requirement.new(">= 2.4.6")
 
-  s.files = `git ls-files -- {lib,ext}/*`.split("\n")
-  s.files += ["README.md"]
-  s.extensions = ["ext/fast_polylines/extconf.rb"]
-  s.test_files = `git ls-files -- {test,spec,features}/*`.split("\n")
-  s.require_paths = "lib"
+  spec.files = `git ls-files -- {lib,ext}/*`.split("\n")
+  spec.files += ["README.md"]
+  spec.extensions = ["ext/fast_polylines/extconf.rb"]
+  spec.test_files = `git ls-files -- {test,spec,features}/*`.split("\n")
+  spec.require_paths = "lib"
 
-  s.add_development_dependency("benchmark-ips", "~> 2.7")
-  s.add_development_dependency("polylines", "~> 0.3")
-  s.add_development_dependency("rspec", "~> 3.5")
+  spec.add_development_dependency("benchmark-ips", "~> 2.7")
+  spec.add_development_dependency("polylines", "~> 0.3")
+  spec.add_development_dependency("rspec", "~> 3.5")
 end
