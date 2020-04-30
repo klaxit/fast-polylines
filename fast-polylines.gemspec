@@ -14,10 +14,9 @@ Gem::Specification.new do |spec|
   spec.license     = "MIT"
   spec.required_ruby_version = Gem::Requirement.new(">= 2.4.6")
 
-  spec.files = `git ls-files -- {lib,ext}/*`.split("\n")
-  spec.files += ["README.md"]
+  spec.files = Dir["{lib,ext}/**/*.{rb,c}"] + %w(README.md CHANGELOG.md)
   spec.extensions = ["ext/fast_polylines/extconf.rb"]
-  spec.test_files = `git ls-files -- {test,spec,features}/*`.split("\n")
+  spec.test_files =Dir["spec/**/*"] + %w(.rspec)
   spec.require_paths = "lib"
 
   spec.add_development_dependency("benchmark-ips", "~> 2.7")
