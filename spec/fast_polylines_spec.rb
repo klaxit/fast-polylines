@@ -1,3 +1,5 @@
+require "fast_polylines"
+
 describe FastPolylines do
   describe ".decode" do
     let(:points) { [[38.5, -120.2], [40.7, -120.95], [43.252, -126.453]] }
