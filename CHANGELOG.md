@@ -10,8 +10,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 
-- A Require ptah that match the gem name (#18)
-
 ### Changed
 
 ### Fixed
