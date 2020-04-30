@@ -16,6 +16,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 
+## [2.1.0] — 2020-04-30
+
+### Added
+
+- A Require ptah that match the gem name (#18)
+
 ## [2.0.1] — 2020-04-02
 
 ### Fixed
@@ -23,5 +29,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Broken behavior when approaching the chunk size limit (#16)
 
 
-[unreleased]: https://github.com/klaxit/fast-polylines/compare/v2.0.1...HEAD
+[unreleased]: https://github.com/klaxit/fast-polylines/compare/v2.1.0...HEAD
+[2.1.0]: https://github.com/klaxit/fast-polylines/compare/v2.0.1...v2.1.0
 [2.0.1]: https://github.com/klaxit/fast-polylines/compare/v2.0.0...v2.0.1
