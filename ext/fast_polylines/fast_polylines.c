@@ -24,8 +24,17 @@
 #define rdbg(...)
 #endif
 
-// This is required to compile on Windows
 typedef unsigned int uint;
+
+// Speed up the code a bit by not calling pow(10.0, precision) since it's always 10^precision
+// Convert that into a lookup instead of doing the calculation
+const double PRECISION_VALUES[MAX_PRECISION+2] = {1.0, 10.0, 1.0e+2, 1.0e+3, 1.0e+4, 1.0e+5, 1.0e+6, 1.0e+7, 1.0e+8, 1.0e+9, 1.0e+10, 1.0e+11, 1.0e+12, 1.0e+13, 1.0e+14};
+static inline double fast_pow10(uint);
+
+// uint precision is already checked earlier to ensure that it's within the range
+static inline double fast_pow10(uint precision) {
+	return PRECISION_VALUES[precision];
+}
 
 static inline uint _get_precision(VALUE value) {
 	int precision = NIL_P(value) ? DEFAULT_PRECISION : NUM2INT(value);
@@ -40,7 +49,8 @@ rb_FastPolylines__decode(int argc, VALUE *argv, VALUE self) {
 	Check_Type(argv[0], T_STRING);
 	char* polyline = StringValueCStr(argv[0]);
 	uint precision = _get_precision(argc > 1 ? argv[1] : Qnil);
-	double precision_value = pow(10.0, precision);
+	double precision_value = fast_pow10(precision);
+
 	VALUE ary = rb_ary_new();
 	// Helps keeping track of whether we are computing lat (0) or lng (1).
 	uint8_t index = 0;
@@ -101,7 +111,8 @@ rb_FastPolylines__encode(int argc, VALUE *argv, VALUE self) {
 	uint precision = _get_precision(argc > 1 ? argv[1] : Qnil);
 	dbg("rb_FastPolylines__encode(..., %u)\n", precision);
 	rdbg(argv[0]);
-	double precision_value = pow(10.0, precision);
+	double precision_value = fast_pow10(precision);
+
 	// This is the maximum possible size the polyline may have. This
 	// being **without** null character. To copy it later as a Ruby
 	// string we'll have to use `rb_str_new` with the length.
