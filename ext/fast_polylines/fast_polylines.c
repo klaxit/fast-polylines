@@ -24,6 +24,9 @@
 #define rdbg(...)
 #endif
 
+// This is required to compile on Windows
+typedef unsigned int uint;
+
 static inline uint _get_precision(VALUE value) {
 	int precision = NIL_P(value) ? DEFAULT_PRECISION : NUM2INT(value);
 	if (precision > MAX_PRECISION) rb_raise(rb_eArgError, "precision too high (https://xkcd.com/2170/)");
