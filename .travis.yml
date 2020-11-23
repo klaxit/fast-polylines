@@ -2,7 +2,6 @@ language: ruby
 os:
   - linux
   - osx
-  - windows
 rvm:
   - 2.4
   - 2.5

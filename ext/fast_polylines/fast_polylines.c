@@ -24,6 +24,7 @@
 #define rdbg(...)
 #endif
 
+// This is required to compile on Windows
 typedef unsigned int uint;
 
 static inline uint _get_precision(VALUE value) {
