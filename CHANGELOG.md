@@ -10,10 +10,17 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 
+- support for windows (#19 #23) by [@mohits]
+
 ### Changed
+
+- Speedup calculation by avoiding calling pow(10,x) (#22) by [@mohits]
 
 ### Fixed
 
+- move from travis to github actions
+
+[@mohits]: https://github.com/mohits
 ## [2.1.0] — 2020-04-30
 
 ### Added
