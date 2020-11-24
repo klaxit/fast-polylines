@@ -5,8 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-
 ## [unreleased] —
+
+### Added
+
+### Changed
+
+### Fixed
+
+## [2.2.0] — 2020-11-24
 
 ### Added
 
@@ -21,6 +28,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - move from travis to github actions
 
 [@mohits]: https://github.com/mohits
+
 ## [2.1.0] — 2020-04-30
 
 ### Added
@@ -34,6 +42,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Broken behavior when approaching the chunk size limit (#16)
 
 
-[unreleased]: https://github.com/klaxit/fast-polylines/compare/v2.1.0...HEAD
+[unreleased]: https://github.com/klaxit/fast-polylines/compare/v2.2.0...HEAD
+[2.2.0]: https://github.com/klaxit/fast-polylines/compare/v2.1.0...v2.2.0
 [2.1.0]: https://github.com/klaxit/fast-polylines/compare/v2.0.1...v2.1.0
 [2.0.1]: https://github.com/klaxit/fast-polylines/compare/v2.0.0...v2.0.1
