@@ -1,7 +1,7 @@
 # Fast Polylines
 
-[![Gem Version](https://badge.fury.io/rb/fast-polylines.svg)](https://badge.fury.io/rb/fast-polylines)
-[![Build Status](https://travis-ci.org/klaxit/fast-polylines.svg?branch=master)](https://travis-ci.org/klaxit/fast-polylines)
+[![Gem](https://img.shields.io/gem/v/fast-polylines)](https://rubygems.org/gems/fast-polylines)
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/klaxit/fast-polylines/Continuous%20Integration)](https://github.com/klaxit/fast-polylines/actions?query=workflow%3A%22Continuous+Integration%22)
 
 Implementation of the [Google polyline algorithm][algorithm].
 
