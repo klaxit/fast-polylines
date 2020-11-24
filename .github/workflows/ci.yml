@@ -1,0 +1,23 @@
+name: Continuous Integration
+
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: '0 0 * * 0' # weekly
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        os: [ubuntu, macos, windows]
+        ruby: [2.4, 2.5, 2.6, 2.7, head]
+    continue-on-error: ${{ matrix.ruby == 'head' }}
+    runs-on: ${{ matrix.os }}-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{ matrix.ruby }}
+        bundler-cache: true
+    - run: make test
