@@ -60,7 +60,7 @@ describe FastPolylines do
       )
       expect { described_class.encode([points[0..1]]) }.to raise_error(
         TypeError,
-        "no implicit conversion to Float from Array"
+        "can't convert Array into Float"
       )
     end
     # The method `_polyline_encode_number("", 16)` will check for a chunk

@@ -135,17 +135,6 @@ rb_FastPolylines__encode(int argc, VALUE *argv, VALUE self) {
 			}
 			for (j = 0; j < 2; j++) {
 				VALUE current_value =	RARRAY_AREF(current_pair, j);
-				switch (TYPE(current_value)) {
-					case T_BIGNUM:
-					case T_FLOAT:
-					case T_FIXNUM:
-					case T_RATIONAL:
-						break;
-					default:
-						free(chunks);
-						rb_raise(rb_eTypeError, "no implicit conversion to Float from %s", rb_obj_classname(current_value));
-				};
-
 				double parsed_value = NUM2DBL(current_value);
 				if (-180.0 > parsed_value || parsed_value > 180.0) {
 					free(chunks);
