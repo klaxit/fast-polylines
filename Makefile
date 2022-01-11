@@ -45,6 +45,11 @@ rubocop: ## Checks ruby syntax
 benchmark: ext ## Run the benchmark
 	bundle exec ruby $(RUBY_FLAG) ./perf/benchmark.rb
 
+.PHONY: publish
+publish: test ## Publish to rubygems
+	gem build
+	gem push fast-polylines-*.gem
+
 ext/$(EXT_NAME)/Makefile: ext/$(EXT_NAME)/extconf.rb
 	cd ext/$(EXT_NAME) && ruby extconf.rb --vendor
 
@@ -57,6 +62,7 @@ ext/$(EXT_NAME)/$(EXT_NAME).bundle: ext/$(EXT_NAME)/Makefile $(ALL_TARGETS)
 ext: ext/$(EXT_NAME)/$(EXT_NAME).bundle ## Compiles the C extension
 
 .PHONY: clean
-clean: ## Cleans C stuff
+clean: ## Cleans compiled stuff
 	cd ext/$(EXT_NAME) && make clean
 	rm ext/$(EXT_NAME)/Makefile
+	rm fast-polylines-*.gem
