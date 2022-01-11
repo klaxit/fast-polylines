@@ -1,3 +1,24 @@
+/**
+ * Document-module: FastPolylines
+ *
+ * Implementation of the [Google polyline algorithm](https://code.google.com/apis/maps/documentation/utilities/polylinealgorithm.html).
+ *
+ * Install it with `gem install fast-polylines`, and then:
+ *
+ *     require "fast_polylines"
+ *
+ *     FastPolylines.encode([[38.5, -120.2], [40.7, -120.95], [43.252, -126.453]])
+ *     # "_p~iF~ps|U_ulLnnqC_mqNvxq`@"
+ *
+ *     FastPolylines.decode("_p~iF~ps|U_ulLnnqC_mqNvxq`@")
+ *     # [[38.5, -120.2], [40.7, -120.95], [43.252, -126.453]]
+ *
+ * You can set an arbitrary precision for your coordinates to be encoded/decoded. It may be from 1
+ * to 13 decimal digits. However, 13 may be too much.
+ *
+ * [![https://xkcd.com/2170/](https://imgs.xkcd.com/comics/coordinate_precision.png)](https://www.explainxkcd.com/wiki/index.php/2170:_Coordinate_Precision)
+ */
+
 #include <ruby.h>
 
 // An encoded number can have at most _precision_ characters. However,
@@ -46,7 +67,15 @@ static inline uint _get_precision(VALUE value) {
 	return (uint)precision;
 }
 
-static inline VALUE
+/**
+ * call-seq:
+ *   FastPolylines.decode(polyline, precision = 5) -> [[lat, lng], ...]
+ *
+ * Decode a polyline to a list of coordinates (lat, lng tuples). You may
+ * set an arbitrary coordinate precision, however, it **must match** the precision
+ * that was used for encoding.
+ */
+static VALUE
 rb_FastPolylines__decode(int argc, VALUE *argv, VALUE self) {
 	rb_check_arity(argc, 1, 2);
 	Check_Type(argv[0], T_STRING);
@@ -103,7 +132,15 @@ _polyline_encode_number(char *chunks, int64_t number) {
 	return i;
 }
 
-static inline VALUE
+/**
+ * call-seq:
+ *   FastPolylines.encode([[lat, lng], ...], precision = 5) -> string
+ *
+ * Encode a list of coordinates to a polyline, you may give a specific precision
+ * if you want to retain more (or less) than 5 digits of precision. The maximum
+ * is 13, and may really be [too much](https://xkcd.com/2170/).
+ */
+static VALUE
 rb_FastPolylines__encode(int argc, VALUE *argv, VALUE self) {
 	rb_check_arity(argc, 1, 2);
 	Check_Type(argv[0], T_ARRAY);
