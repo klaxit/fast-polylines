@@ -1,0 +1,7 @@
+--markup markdown
+--output-dir ./yardoc
+lib/**/*.rb
+ext/**/*.c
+-
+README.md
+CHANGELOG.md

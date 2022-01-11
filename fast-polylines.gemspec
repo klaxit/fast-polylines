@@ -16,7 +16,7 @@ Gem::Specification.new do |spec|
 
   spec.files = Dir["{lib,ext}/**/*.{rb,c}"] + %w(README.md CHANGELOG.md)
   spec.extensions = ["ext/fast_polylines/extconf.rb"]
-  spec.test_files =Dir["spec/**/*"] + %w(.rspec)
+  spec.test_files = Dir["spec/**/*"] + %w(.rspec)
   spec.require_paths = "lib"
 
   spec.add_development_dependency("benchmark-ips", "~> 2.7")
