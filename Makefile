@@ -20,7 +20,7 @@ FMT_TITLE='\\033[7\;1m'
 FMT_PRIMARY='\\033[36m'
 FMT_END='\\033[0m'
 .PHONY: help
-help: ## Shows this help menu.
+help: ## Shows this help menu
 	@printf -- "                               FAST-POLYLINES\n"
 	@printf -- "---------------------------------------------------------------------------\n"
 	@awk ' \
@@ -30,11 +30,11 @@ help: ## Shows this help menu.
 		' $(MAKEFILE_LIST)
 
 .PHONY: console
-console: ext ## Runs an irb console with fast-polylines
+console: ext ## Runs an irb console with fast-polylines
 	irb $(RUBY_FLAG)
 
 .PHONY: test
-test: ext ## Runs tests
+test: ext ## Runs tests
 	bundle exec rspec
 
 .PHONY: rubocop
@@ -42,7 +42,7 @@ rubocop: ## Checks ruby syntax
 	bundle exec rubocop
 
 .PHONY: benchmark
-benchmark: ext ## Run the benchmark
+benchmark: ext ## Run the benchmark
 	bundle exec ruby $(RUBY_FLAG) ./perf/benchmark.rb
 
 .PHONY: publish
@@ -60,6 +60,14 @@ ext/$(EXT_NAME)/$(EXT_NAME).bundle: ext/$(EXT_NAME)/Makefile $(ALL_TARGETS)
 
 .PHONY: ext
 ext: ext/$(EXT_NAME)/$(EXT_NAME).bundle ## Compiles the C extension
+
+.clangd:
+	@echo "CompileFlags:\n  Add:\n$$(\
+		pkg-config --cflags python-3.10 | tr ' ' "\0" | xargs -0 -I{} echo '    - {}'\
+	)" > .clangd
+
+.PHONY: setup-clang
+setup-clang: .clangd ## Setup clangd for C/C++ development
 
 .PHONY: clean
 clean: ## Cleans compiled stuff

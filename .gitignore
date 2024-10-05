@@ -1,5 +1,7 @@
 *.gem
+.clangd
 .rubocop-*
+.ruby-version
 Gemfile.lock
 /.yardoc
 /yardoc

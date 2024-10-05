@@ -1,0 +1,6 @@
+---
+BasedOnStyle: Google
+IndentWidth: 4
+UseTab: ForIndentation
+TabWidth: 4
+CommentPragmas: '[.*](.*)|\* {5}.*'
