@@ -8,6 +8,13 @@ on:
   workflow_dispatch:
 
 jobs:
+  ok:
+    if: ${{ always() }}
+    runs-on: ubuntu-latest
+    name: All Tests Passed
+    needs: [test, memcheck]
+    steps:
+      - run: '[[ "${{ needs.test.result }}" == "success" && "${{ needs.memcheck.result }}" == "success" ]]'
   test:
     strategy:
       matrix:
