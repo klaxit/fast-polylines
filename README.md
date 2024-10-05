@@ -1,14 +1,13 @@
 # Fast Polylines
 
 [![Gem](https://img.shields.io/gem/v/fast-polylines)](https://rubygems.org/gems/fast-polylines)
-[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/klaxit/fast-polylines/Continuous%20Integration)](https://github.com/klaxit/fast-polylines/actions?query=workflow%3A%22Continuous+Integration%22)
+[![Continuous Integration Status](https://github.com/klaxit/fast-polylines/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/klaxit/fast-polylines/actions?query=workflow%3A%22Continuous+Integration%22)
 
 Implementation of the [Google polyline algorithm][algorithm].
 
 **BREAKING CHANGES:** The version 2 of FastPolylines includes breaking changes, see [Migrate from V1](#migrate-from-V1)
 
-
-About **300x faster encoding and decoding**  than [Joshua Clayton's gem][polylines].
+About **300x faster encoding and decoding** than [Joshua Clayton's gem][polylines].
 
 `make benchmark` on a MacBook pro 13 - 2,3 GHz Intel Core i5:
 
@@ -54,6 +53,7 @@ gem install fast-polylines
 ```
 
 or in your `Gemfile`:
+
 ```ruby
 gem "fast-polylines", "~> 2.0.0"
 ```
@@ -75,6 +75,7 @@ FastPolylines.decode("_p~iF~ps|U_ulLnnqC_mqNvxq`@")
 **Use a different precision**
 
 Default precision is `5` decimals, to use a precision of `6`:
+
 ```ruby
 FastPolylines.encode([[38.5, -120.2], [40.7, -120.95], [43.252, -126.453]], 6)
 # "_izlhA~rlgdF_{geC~ywl@_kwzCn`{nI"
@@ -82,6 +83,7 @@ FastPolylines.encode([[38.5, -120.2], [40.7, -120.95], [43.252, -126.453]], 6)
 FastPolylines.decode("_izlhA~rlgdF_{geC~ywl@_kwzCn`{nI", 6)
 # [[38.5, -120.2], [40.7, -120.95], [43.252, -126.453]]
 ```
+
 The precision max is `13`.
 
 ## Migrate from V1
@@ -139,8 +141,7 @@ current version loaded.
 
 Please see LICENSE
 
-
 [algorithm]: https://code.google.com/apis/maps/documentation/utilities/polylinealgorithm.html
 [polylines]: https://github.com/joshuaclayton/polylines
-[xkcd]:      https://xkcd.com/2170/
-[ruby-c]:    https://github.com/ruby/ruby/blob/master/doc/extension.rdoc
+[xkcd]: https://xkcd.com/2170/
+[ruby-c]: https://github.com/ruby/ruby/blob/master/doc/extension.rdoc

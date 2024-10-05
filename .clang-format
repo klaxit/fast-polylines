@@ -3,4 +3,6 @@ BasedOnStyle: Google
 IndentWidth: 4
 UseTab: ForIndentation
 TabWidth: 4
+# Allow Markdown links to be longer than 80 characters.
+# Allow code examples to be longer than 80 characters.
 CommentPragmas: '[.*](.*)|\* {5}.*'
