@@ -37,6 +37,10 @@ console: ext ## Runs an irb console with fast-polylines
 test: ext ## Runs tests
 	bundle exec rspec
 
+.PHONY: memcheck
+memcheck: ext ## Run the memory check
+	bundle exec ruby_memcheck $(RUBY_FLAG) -r rspec/autorun -e '' -- spec
+
 .PHONY: rubocop
 rubocop: ## Checks ruby syntax
 	bundle exec rubocop
