@@ -13,8 +13,9 @@
  *     FastPolylines.decode("_p~iF~ps|U_ulLnnqC_mqNvxq`@")
  *     # [[38.5, -120.2], [40.7, -120.95], [43.252, -126.453]]
  *
- * You can set an arbitrary precision for your coordinates to be encoded/decoded. It may be from 1
- * to 13 decimal digits. However, 13 may be too much.
+ * You can set an arbitrary precision for your coordinates to be
+ * encoded/decoded. It may be from 1 to 13 decimal digits. However,
+ * 13 may be too much.
  *
  * [![https://xkcd.com/2170/](https://imgs.xkcd.com/comics/coordinate_precision.png)](https://www.explainxkcd.com/wiki/index.php/2170:_Coordinate_Precision)
  */
@@ -54,16 +55,17 @@ typedef unsigned int uint;
 // that it is within the range.
 static inline double _fast_pow10(uint precision) {
 	const double lookup[MAX_PRECISION + 1] = {
-		1.0, 10.0, 1.0e+2, 1.0e+3, 1.0e+4, 1.0e+5, 1.0e+6, 1.0e+7,
-		1.0e+8, 1.0e+9, 1.0e+10, 1.0e+11, 1.0e+12, 1.0e+13
-	};
+	    1.0,    10.0,   1.0e+2, 1.0e+3,  1.0e+4,  1.0e+5,  1.0e+6,
+	    1.0e+7, 1.0e+8, 1.0e+9, 1.0e+10, 1.0e+11, 1.0e+12, 1.0e+13};
 	return lookup[precision];
 }
 
 static inline uint _get_precision(VALUE value) {
 	int precision = NIL_P(value) ? DEFAULT_PRECISION : NUM2INT(value);
-	if (precision > MAX_PRECISION) rb_raise(rb_eArgError, "precision too high (https://xkcd.com/2170/)");
-	if (precision < 0) rb_raise(rb_eArgError, "negative precision doesn't make sense");
+	if (precision > MAX_PRECISION)
+		rb_raise(rb_eArgError, "precision too high (https://xkcd.com/2170/)");
+	if (precision < 0)
+		rb_raise(rb_eArgError, "negative precision doesn't make sense");
 	return (uint)precision;
 }
 
@@ -72,14 +74,13 @@ static inline uint _get_precision(VALUE value) {
  *   FastPolylines.decode(polyline, precision = 5) -> [[lat, lng], ...]
  *
  * Decode a polyline to a list of coordinates (lat, lng tuples). You may
- * set an arbitrary coordinate precision, however, it **must match** the precision
- * that was used for encoding.
+ * set an arbitrary coordinate precision, however, it **must match** the
+ * precision that was used for encoding.
  */
-static VALUE
-rb_FastPolylines__decode(int argc, VALUE *argv, VALUE self) {
+static VALUE rb_FastPolylines__decode(int argc, VALUE *argv, VALUE self) {
 	rb_check_arity(argc, 1, 2);
 	Check_Type(argv[0], T_STRING);
-	char* polyline = StringValueCStr(argv[0]);
+	char *polyline = StringValueCStr(argv[0]);
 	uint precision = _get_precision(argc > 1 ? argv[1] : Qnil);
 	double precision_value = _fast_pow10(precision);
 
@@ -105,18 +106,21 @@ rb_FastPolylines__decode(int argc, VALUE *argv, VALUE self) {
 		if (!(chunk & 0x20)) {
 			delta = (delta & 1) ? ~(delta >> 1) : (delta >> 1);
 			latlng[index] += delta;
-			sub_ary[index] = rb_float_new((double) latlng[index] / precision_value);
-			// When both coordinates are parsed, we can push those to the result ary.
+			sub_ary[index] =
+			    rb_float_new((double)latlng[index] / precision_value);
+			// When both coordinates are parsed, we can push those to the result
+			// ary.
 			if (index) rb_ary_push(ary, rb_ary_new_from_values(2, sub_ary));
 			// Reinitilize since we are done for current coordinate.
-			index = 1 - index; delta = 0; shift = 0;
+			index = 1 - index;
+			delta = 0;
+			shift = 0;
 		}
 	}
 	return ary;
 }
 
-static inline uint8_t
-_polyline_encode_number(char *chunks, int64_t number) {
+static inline uint8_t _polyline_encode_number(char *chunks, int64_t number) {
 	dbg("_polyline_encode_number(\"%s\", %lli)\n", chunks, number);
 	number = number < 0 ? ~(number << 1) : (number << 1);
 	uint8_t i = 0;
@@ -140,8 +144,7 @@ _polyline_encode_number(char *chunks, int64_t number) {
  * if you want to retain more (or less) than 5 digits of precision. The maximum
  * is 13, and may really be [too much](https://xkcd.com/2170/).
  */
-static VALUE
-rb_FastPolylines__encode(int argc, VALUE *argv, VALUE self) {
+static VALUE rb_FastPolylines__encode(int argc, VALUE *argv, VALUE self) {
 	rb_check_arity(argc, 1, 2);
 	Check_Type(argv[0], T_ARRAY);
 	size_t len = RARRAY_LEN(argv[0]);
@@ -156,46 +159,49 @@ rb_FastPolylines__encode(int argc, VALUE *argv, VALUE self) {
 	// This is the maximum possible size the polyline may have. This
 	// being **without** null character. To copy it later as a Ruby
 	// string we'll have to use `rb_str_new` with the length.
-	dbg("allocated size: %u * 2 * %lu = %lu\n",
-	    MAX_ENCODED_CHUNKS(precision),
-	    len,
-	    MAX_ENCODED_CHUNKS(precision) * 2 * len);
-	char *chunks = malloc(MAX_ENCODED_CHUNKS(precision) * 2 * len * sizeof(char));
+	dbg("allocated size: %u * 2 * %lu = %lu\n", MAX_ENCODED_CHUNKS(precision),
+	    len, MAX_ENCODED_CHUNKS(precision) * 2 * len);
+	char *chunks =
+	    malloc(MAX_ENCODED_CHUNKS(precision) * 2 * len * sizeof(char));
 	size_t chunks_index = 0;
 	for (i = 0; i < len; i++) {
-			current_pair = RARRAY_AREF(argv[0], i);
-			uint8_t j;
-			Check_Type(current_pair, T_ARRAY);
-			if (RARRAY_LEN(current_pair) != 2) {
-				free(chunks);
-				rb_raise(rb_eArgError, "wrong number of coordinates");
-			}
-			for (j = 0; j < 2; j++) {
-				VALUE current_value =	RARRAY_AREF(current_pair, j);
-				switch (TYPE(current_value)) {
-					case T_BIGNUM:
-					case T_FLOAT:
-					case T_FIXNUM:
-					case T_RATIONAL:
-						break;
-					default:
-						free(chunks);
-						rb_raise(rb_eTypeError, "no implicit conversion to Float from %s", rb_obj_classname(current_value));
-				};
-
-				double parsed_value = NUM2DBL(current_value);
-				if (-180.0 > parsed_value || parsed_value > 180.0) {
+		current_pair = RARRAY_AREF(argv[0], i);
+		uint8_t j;
+		Check_Type(current_pair, T_ARRAY);
+		if (RARRAY_LEN(current_pair) != 2) {
+			free(chunks);
+			rb_raise(rb_eArgError, "wrong number of coordinates");
+		}
+		for (j = 0; j < 2; j++) {
+			VALUE current_value = RARRAY_AREF(current_pair, j);
+			switch (TYPE(current_value)) {
+				case T_BIGNUM:
+				case T_FLOAT:
+				case T_FIXNUM:
+				case T_RATIONAL:
+					break;
+				default:
 					free(chunks);
-					rb_raise(rb_eArgError, "coordinates must be between -180.0 and 180.0");
-				}
-				int64_t rounded_value = round(parsed_value * precision_value);
-				int64_t delta = rounded_value - prev_pair[j];
-				prev_pair[j] = rounded_value;
-				// We pass a pointer to the current chunk that need to be filled. Doing so
-				// avoid having to copy the string every single iteration.
-				chunks_index += _polyline_encode_number(chunks + chunks_index * sizeof(char), delta);
-				dbg("%s\n", chunks);
+					rb_raise(rb_eTypeError,
+					         "no implicit conversion to Float from %s",
+					         rb_obj_classname(current_value));
+			};
+
+			double parsed_value = NUM2DBL(current_value);
+			if (-180.0 > parsed_value || parsed_value > 180.0) {
+				free(chunks);
+				rb_raise(rb_eArgError,
+				         "coordinates must be between -180.0 and 180.0");
 			}
+			int64_t rounded_value = round(parsed_value * precision_value);
+			int64_t delta = rounded_value - prev_pair[j];
+			prev_pair[j] = rounded_value;
+			// We pass a pointer to the current chunk that need to be filled.
+			// Doing so avoid having to copy the string every single iteration.
+			chunks_index += _polyline_encode_number(
+			    chunks + chunks_index * sizeof(char), delta);
+			dbg("%s\n", chunks);
+		}
 	}
 	dbg("final chunks_index: %zu\n", chunks_index);
 	VALUE polyline = rb_str_new(chunks, chunks_index);
@@ -205,6 +211,8 @@ rb_FastPolylines__encode(int argc, VALUE *argv, VALUE self) {
 
 void Init_fast_polylines() {
 	VALUE mFastPolylines = rb_define_module("FastPolylines");
-	rb_define_module_function(mFastPolylines, "decode", rb_FastPolylines__decode, -1);
-	rb_define_module_function(mFastPolylines, "encode", rb_FastPolylines__encode, -1);
+	rb_define_module_function(mFastPolylines, "decode",
+	                          rb_FastPolylines__decode, -1);
+	rb_define_module_function(mFastPolylines, "encode",
+	                          rb_FastPolylines__encode, -1);
 }
