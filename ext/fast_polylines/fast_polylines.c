@@ -167,7 +167,15 @@ static VALUE rb_FastPolylines__encode(int argc, VALUE *argv, VALUE self) {
 	for (i = 0; i < len; i++) {
 		current_pair = RARRAY_AREF(argv[0], i);
 		uint8_t j;
-		Check_Type(current_pair, T_ARRAY);
+		switch (TYPE(current_pair)) {
+			case T_ARRAY:
+				break;
+			default:
+				free(chunks);
+				rb_raise(rb_eTypeError,
+				         "wrong argument type %s (expected Array)",
+				         rb_obj_classname(current_pair));
+		};
 		if (RARRAY_LEN(current_pair) != 2) {
 			free(chunks);
 			rb_raise(rb_eArgError, "wrong number of coordinates");
